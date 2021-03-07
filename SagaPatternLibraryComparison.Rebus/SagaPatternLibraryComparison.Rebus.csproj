@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>dotnet-SagaPatternLibraryComparison.Rebus-79532A80-512E-40D6-A6BF-C65CB6B9A76F</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Rebus" Version="6.5.3" />
+    <PackageReference Include="Rebus.AzureServiceBus" Version="8.1.1" />
+    <PackageReference Include="Rebus.ServiceProvider" Version="6.4.1" />
+    <PackageReference Include="Rebus.SqlServer" Version="7.1.7" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SagaPatternLibraryComparison.Domain\SagaPatternLibraryComparison.Domain.csproj" />
+  </ItemGroup>
+</Project>
