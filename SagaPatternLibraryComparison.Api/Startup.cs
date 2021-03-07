@@ -32,7 +32,7 @@ namespace SagaPatternLibraryComparison.Api
                 rebus => rebus
                    .Logging(l => l.Console())
                    .Routing(r => r.TypeBased().Map<OrderCreated>("OrdersProcessorQueue"))
-                   .Transport(t => t.UseAzureServiceBusAsOneWayClient("Endpoint=sb://pregoli.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=MlBS+bIXVPF9phNeRKcHMPIQvJWbTnPTEiGTKOUkRzc="))
+                   .Transport(t => t.UseAzureServiceBusAsOneWayClient("xxx"))
                    .Options(t => t.SimpleRetryStrategy(errorQueueAddress: "ErrorQueue")));
         }
 

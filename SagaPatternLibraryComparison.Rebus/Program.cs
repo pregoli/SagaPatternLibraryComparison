@@ -28,25 +28,6 @@ namespace SagaPatternLibraryComparison.Rebus
 
                     services.AddSingleton<IConfiguration>(configuration);
 
-                    //using (var activator = new BuiltinHandlerActivator())
-                    //{
-                    //    activator.Register((bus, context) => new ProcessOrderSaga(bus));
-
-                    //    var bus = Configure.With(activator)
-                    //        .Logging(l => l.Console())
-                    //        .Routing(r => r.TypeBased().MapAssemblyOf<OrderCreated>("OrdersProcessorQueue"))
-                    //        .Transport(t => t.UseAzureServiceBus(configuration.GetSection("AzureServiceBus:ConnectionString").Value, "OrdersProcessorQueue").AutomaticallyRenewPeekLock())
-                    //        .Options(t => t.SimpleRetryStrategy(errorQueueAddress: "ErrorQueue"))
-                    //        .Options(t => t.EnableMessageAuditing(auditQueue: "AuditQueue"))
-                    //        .Sagas(s => s.StoreInSqlServer(
-                    //            connectionString: "Server=localhost;Database=master;Trusted_Connection=True;",
-                    //            dataTableName: "SagaTest3",
-                    //            indexTableName: "indextest3"))
-                    //        .Start();
-
-                    //    services.AddSingleton<IBus>(bus);
-                    //}
-
                     services.AddRebus(
                         configure => configure
                            .Logging(l => l.Console())
@@ -55,7 +36,7 @@ namespace SagaPatternLibraryComparison.Rebus
                            .Options(t => t.SimpleRetryStrategy(errorQueueAddress: "ErrorQueue"))
                            .Options(t => t.EnableMessageAuditing(auditQueue: "AuditQueue"))
                            .Sagas(s => s.StoreInSqlServer(
-                                connectionString: "Server=localhost;Database=master;Trusted_Connection=True;",
+                                connectionString: configuration.GetSection("SqlServer:ConnectionString").Value,
                                 dataTableName: "OrderProcessDemo",
                                 indexTableName: "OrderProcessDemoIndex"))
                     );
