@@ -15,14 +15,12 @@ namespace SagaPatternLibraryComparison.Api
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -32,11 +30,10 @@ namespace SagaPatternLibraryComparison.Api
                 rebus => rebus
                    .Logging(l => l.Console())
                    .Routing(r => r.TypeBased().Map<OrderCreated>("OrdersProcessorQueue"))
-                   .Transport(t => t.UseAzureServiceBusAsOneWayClient("xxx"))
+                   .Transport(t => t.UseAzureServiceBusAsOneWayClient(_configuration.GetSection("AzureServiceBus:ConnectionString").Value))
                    .Options(t => t.SimpleRetryStrategy(errorQueueAddress: "ErrorQueue")));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

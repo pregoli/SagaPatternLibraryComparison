@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace SagaPatternLibraryComparison.Rebus
 {
-    public class ProcessOrderHandler :
-        IHandleMessages<ProcessOrder>,
-        IHandleMessages<OrderCreated>
+    public class ProcessOrderHandler : IHandleMessages<ProcessOrder>
     {
         private readonly IBus _bus;
 
@@ -21,11 +19,6 @@ namespace SagaPatternLibraryComparison.Rebus
         {
             await Task.Delay(500);
             await _bus.Reply(new OrderProcessed { OrderId = message.OrderId, Username = message.Username });
-        }
-
-        public async Task Handle(OrderCreated message)
-        {
-            await Task.Delay(500);
         }
     }
 }
